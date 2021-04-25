@@ -1,0 +1,19 @@
+{
+  "routingFeature": {
+    "title": "Enrutamiento estándar del sector",
+    "description": "Es natural querer añadir páginas (por ejemplo, `/about`) a su aplicación, y el enrutamiento lo hace posible."
+  },
+  "i18nFeature": {
+    "title": "i18n Internacionalización y Pluralización",
+    "selectLanguage": "Seleccione el idioma",
+    "description": "Las aplicaciones escalables tienen que soportar varios idiomas, añadir y soportar fácilmente varios idiomas. Cambie el idioma a continuación para ver cómo se actualiza instantáneamente la página sin necesidad de refrescarla."
+  },
+  "feedbackFeature": {
+    "title": "Cambios instantáneos",
+    "description": "¡Disfruta del mejor DX y codifica tu aplicación según la piensas! Tus cambios guardados en el CSS y JS se reflejan instantáneamente sin necesidad de refrescar la página."
+  },
+  "scaffoldingFeature": {
+    "title": "Rápida estructura",
+    "description": "Automatica la creación de componentes, características, rutas, selectores y sagas - y sus pruebas - ¡directamente desde la CLI! ¡Evita luchar contra el acoplamiento de tu código y céntrate en tu aplicación!"
+  }
+}
