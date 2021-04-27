@@ -46,7 +46,7 @@
 
 ## About The Project
 
-Frontend webapp for the api project [react-front-webapp](https://github.com/masfernandez/react-front-webapp) 
+Frontend webapp for the api project [symfony-ddd-hexarch-cqrs](https://github.com/masfernandez/symfony-ddd-hexarch-cqrs) 
 
 The boilerplate is based on [react-boilerplate-cra-template](https://github.com/react-boilerplate/react-boilerplate-cra-template)
 
@@ -56,7 +56,7 @@ The boilerplate is based on [react-boilerplate-cra-template](https://github.com/
 
 ### Prerequisites
 
-- [symfony-ddd-hexarch-cqrs](https://github.com/masfernandez/symfony-ddd-hexarch-cqrs)
+- [symfony-ddd-hexarch-cqrs](https://github.com/masfernandez/symfony-ddd-hexarch-cqrs). Follow README steps to install it.
 
 
 ### Installation

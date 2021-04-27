@@ -5,50 +5,31 @@ import { Input } from './components/Input';
 import { TextButton } from './components/TextButton';
 import { Title } from '../../HomePage/components/Title';
 import { useLoginFormSlice } from './slice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginErrorType } from './slice/types';
+import { LoadingIndicator } from 'app/components/LoadingIndicator';
 import {
   selectEmail,
   selectError,
+  selectLoading,
   selectPassword,
   selectToken,
 } from './slice/selectors';
 
 export function LoginForm() {
   const { actions } = useLoginFormSlice();
+  const dispatch = useDispatch();
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
   const error = useSelector(selectError);
   const token = useSelector(selectToken);
-  const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
 
   const onChangeEmail = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const input = evt.currentTarget;
-    const email = evt.currentTarget.value;
-    const pattern = new RegExp(
-      /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
-    );
-
-    if (!pattern.test(email)) {
-      input.setAttribute('style', 'color:red; border: 1px solid red;');
-    } else {
-      input.setAttribute('style', 'color:none; border: 1px solid green;');
-    }
-
-    dispatch(actions.changeEmail(email));
+    dispatch(actions.changeEmail(evt.currentTarget.value));
   };
 
   const onChangePassword = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const input = evt.currentTarget;
-    const password = evt.currentTarget.value;
-    const pattern = new RegExp(/^.{9,20}$/i);
-
-    if (!pattern.test(password)) {
-      input.setAttribute('style', 'color:red; border: 1px solid red;');
-    } else {
-      input.setAttribute('style', 'color:none; border: 1px solid green;');
-    }
-
     dispatch(actions.changePassword(evt.currentTarget.value));
   };
 
@@ -57,11 +38,55 @@ export function LoginForm() {
     useEffect(effect, []);
   };
 
+  function isWrongEmail(email) {
+    const pattern = new RegExp(
+      /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
+    );
+    return !pattern.test(email);
+  }
+
+  function isWrongPassword(password) {
+    const pattern = new RegExp(/^.{10,255}$/i);
+    return !pattern.test(password);
+  }
+
+  const onBlurEmail = (evt: React.FocusEvent<HTMLInputElement>) => {
+    const input = evt.currentTarget;
+    const email = evt.currentTarget.value;
+    if (isWrongEmail(email)) {
+      input.setAttribute('style', 'color:red; border: 1px solid red;');
+    } else {
+      input.setAttribute('style', 'color:none; border: 1px solid green;');
+    }
+  };
+
+  const onBlurPassword = (evt: React.FocusEvent<HTMLInputElement>) => {
+    const input = evt.currentTarget;
+    const password = evt.currentTarget.value;
+    if (isWrongPassword(password)) {
+      input.setAttribute('style', 'color:red; border: 1px solid red;');
+    } else {
+      input.setAttribute('style', 'color:none; border: 1px solid green;');
+    }
+  };
+
   const onSubmitForm = (evt?: React.FormEvent<HTMLFormElement>) => {
     /* istanbul ignore next  */
     if (evt !== undefined && evt.preventDefault) {
       evt.preventDefault();
     }
+
+    if (isWrongEmail(email)) {
+      dispatch(actions.formError(LoginErrorType.WRONG_EMAIL));
+      return;
+    }
+
+    if (isWrongPassword(password)) {
+      dispatch(actions.formError(LoginErrorType.WRONG_PASSWORD));
+      return;
+    }
+
+    dispatch(actions.formError(LoginErrorType.NO_ERROR));
     dispatch(actions.authenticate());
   };
 
@@ -69,14 +94,12 @@ export function LoginForm() {
     switch (error) {
       case LoginErrorType.NO_ERROR:
         return '';
-      case LoginErrorType.EMAIL_EMPTY:
-        return 'EMAIL_EMPTY';
-      case LoginErrorType.PASSWORD_EMPTY:
-        return 'PASSWORD_EMPTY';
-      case LoginErrorType.BAD_REQUEST:
-        return 'BAD_REQUEST';
+      case LoginErrorType.WRONG_EMAIL:
+        return 'The email does not seems to be a valid email';
+      case LoginErrorType.WRONG_PASSWORD:
+        return 'Password should be longer than 10 characters';
       case LoginErrorType.UNAUTHORIZED:
-        return 'UNAUTHORIZED';
+        return 'Wrong credentials';
       default:
         return 'An error has occurred!';
     }
@@ -94,6 +117,7 @@ export function LoginForm() {
             placeholder="email"
             value={email}
             onChange={onChangeEmail}
+            onBlur={onBlurEmail}
           />
         </InputWrapper>
         <InputWrapper>
@@ -102,11 +126,13 @@ export function LoginForm() {
             placeholder="password"
             value={password}
             onChange={onChangePassword}
+            onBlur={onBlurPassword}
           />
         </InputWrapper>
         <InputWrapper>
-          <Input type="submit" value="Submit" />
+          <SubmitInput type="submit" value="Submit" />
         </InputWrapper>
+        {loading ? <LoadingIndicator small /> : ''}
       </FormGroup>
       <ErrorText>{repoErrorText(error)}</ErrorText>
       <P>
@@ -160,4 +186,11 @@ export const P = styled.p`
   line-height: 1.5;
   color: ${p => p.theme.textSecondary};
   margin: 0.625rem 0 1.5rem 0;
+`;
+
+const SubmitInput = styled(Input)`
+  &:focus {
+    border-color: ${p => p.theme.textSecondary};
+    box-shadow: 0 0 0 0;
+  }
 `;

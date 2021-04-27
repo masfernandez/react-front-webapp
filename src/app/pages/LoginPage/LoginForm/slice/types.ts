@@ -9,9 +9,8 @@ export interface LoginFormState {
 
 export enum LoginErrorType {
   NO_ERROR,
-  EMAIL_EMPTY,
-  PASSWORD_EMPTY,
-  BAD_REQUEST = 400,
+  WRONG_EMAIL,
+  WRONG_PASSWORD,
   UNAUTHORIZED = 401,
 }
 

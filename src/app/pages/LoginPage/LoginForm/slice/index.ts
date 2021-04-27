@@ -25,19 +25,21 @@ const slice = createSlice({
     changeToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
     },
+    changeLoading(state, action: PayloadAction<boolean>) {
+      state.loading = action.payload;
+    },
     authenticate(state) {
-      state.loading = true;
+      state.token = '';
     },
     authenticatedSuccess(state, action: PayloadAction<string>) {
-      state.loading = false;
       state.token = action.payload;
     },
     authenticatedError(state, action: PayloadAction<LoginErrorType>) {
-      state.loading = false;
+      state.token = '';
       state.error = action.payload;
     },
     formError(state, action: PayloadAction<LoginErrorType>) {
-      state.loading = false;
+      state.token = '';
       state.error = action.payload;
     },
   },
