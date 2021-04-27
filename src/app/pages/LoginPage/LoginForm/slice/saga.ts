@@ -1,7 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { selectEmail, selectPassword } from './selectors';
 import { loginFormActions as actions } from '.';
-import { LoginErrorType } from './types';
 import { fetchToken } from 'utils/request';
 
 /**
@@ -10,15 +9,8 @@ import { fetchToken } from 'utils/request';
 export function* authenticate() {
   const email = yield select(selectEmail);
   const password = yield select(selectPassword);
-  if (email.length === 0) {
-    yield put(actions.formError(LoginErrorType.EMAIL_EMPTY));
-    return;
-  }
-  if (password.length === 0) {
-    yield put(actions.formError(LoginErrorType.PASSWORD_EMPTY));
-    return;
-  }
-  yield put(actions.formError(LoginErrorType.NO_ERROR));
+
+  yield put(actions.changeLoading(true));
   const requestURL = 'https://backend.127.0.0.1.xip.io/authentication/jwt';
   const options = {
     method: 'POST',
@@ -39,6 +31,7 @@ export function* authenticate() {
   } catch (error) {
     yield put(actions.authenticatedError(error.response.status));
   }
+  yield put(actions.changeLoading(false));
 }
 
 /**

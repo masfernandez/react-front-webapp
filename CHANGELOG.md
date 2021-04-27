@@ -14,6 +14,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [0.1.1] - 2021-04-27
+### Added
+- Include theme switch in home page
+- Loading spinner in login page
+### Changed
+### Deprecated
+### Removed
+- Home page features
+### Fixed
+- Makefile: build target
+- Login form
+### Security
+
+
+
 ## [0.1.0] - 2021-04-25
 ### Added
 - Boilerplate React code
@@ -26,5 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]: https://github.com/masfernandez/symfony-ddd-hexarch-cqrs/compare/master...develop
-[0.1.0]: https://github.com/masfernandez/symfony-ddd-hexarch-cqrs/releases/tag/v0.1.0
+[Unreleased]: https://github.com/masfernandez/react-front-webapp/compare/master...develop
+[0.1.1]: https://github.com/masfernandez/react-front-webapp/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/masfernandez/react-front-webapp/releases/tag/v0.1.0

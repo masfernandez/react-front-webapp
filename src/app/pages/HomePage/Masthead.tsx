@@ -2,12 +2,17 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { Logos } from './Logos';
 import { Title } from './components/Title';
+import { ThemeSwitch } from './Features/ThemeSwitch';
+import { LanguageSwitch } from './Features/LanguageSwitch';
 
 export function Masthead() {
   return (
     <Wrapper>
       <Logos />
       <Title>MusicLabel</Title>
+      <ThemeSwitch />
+      <br />
+      <LanguageSwitch />
     </Wrapper>
   );
 }
