@@ -106,6 +106,12 @@ Project Link: [https://github.com/masfernandez/react-front-webapp](https://githu
 
 * CHANGELOG template based on: [https://keepachangelog.com/en/1.0.0/](https://keepachangelog.com/en/1.0.0/)
 
+## Repo Stats
+
+<p>
+    <img src="https://views.whatilearened.today/views/github/masfernandez/views.svg"/>
+</p>
+
 [version-shield]: https://img.shields.io/github/v/release/masfernandez/react-front-webapp?style=for-the-badge
 [version]: https://github.com/masfernandez/react-front-webapp/releases
 

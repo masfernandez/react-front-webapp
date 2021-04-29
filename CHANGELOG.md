@@ -14,6 +14,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [0.1.2] - 2021-04-29
+### Added
+- Repo stats
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+
+
 ## [0.1.1] - 2021-04-27
 ### Added
 - Include theme switch in home page
@@ -42,5 +53,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 [Unreleased]: https://github.com/masfernandez/react-front-webapp/compare/master...develop
+[0.1.2]: https://github.com/masfernandez/react-front-webapp/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/masfernandez/react-front-webapp/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/masfernandez/react-front-webapp/releases/tag/v0.1.0
