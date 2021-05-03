@@ -1,0 +1,46 @@
+name: CI/CD Github actions
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+jobs:
+
+    test:
+        name: Testing react app
+        runs-on: ${{ matrix.operating-system }}
+
+        strategy:
+            matrix:
+                operating-system: [ ubuntu-latest ]
+
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+
+            # todo tests
+
+    deploy:
+        name: Deploy
+        needs: [ test ]
+        runs-on: ${{ matrix.operating-system }}
+
+        strategy:
+            matrix:
+                operating-system: [ ubuntu-latest ]
+
+        steps:
+            -   name: Executing remote command
+                uses: appleboy/ssh-action@master
+                with:
+                    host: ${{ secrets.A2_HOST }}
+                    username: ${{ secrets.A2_USERNAME }}
+                    key: ${{ secrets.A2_SSHKEY }}
+                    port: ${{ secrets.A2_PORT }}
+                    script: |
+                        cd workspace/react-front-webapp
+                        git pull origin -X theirs
+                        docker-compose down; docker-compose up -d --build

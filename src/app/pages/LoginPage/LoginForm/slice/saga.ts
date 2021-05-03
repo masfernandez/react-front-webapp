@@ -11,7 +11,7 @@ export function* authenticate() {
   const password = yield select(selectPassword);
 
   yield put(actions.changeLoading(true));
-  const requestURL = 'https://backend.127.0.0.1.xip.io/authentication/jwt';
+  const requestURL = process.env.REACT_APP_API_URL + '/jwt';
   const options = {
     method: 'POST',
     credentials: 'include',
@@ -29,9 +29,10 @@ export function* authenticate() {
     const token = headerAndPayloadToken.split(':')[1];
     yield put(actions.authenticatedSuccess(token));
   } catch (error) {
-    yield put(actions.authenticatedError(error.response.status));
+    yield put(actions.authenticatedError(error.response?.status ?? 500));
+  } finally {
+    yield put(actions.changeLoading(false));
   }
-  yield put(actions.changeLoading(false));
 }
 
 /**

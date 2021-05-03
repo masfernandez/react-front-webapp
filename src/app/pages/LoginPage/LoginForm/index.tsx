@@ -101,7 +101,7 @@ export function LoginForm() {
       case LoginErrorType.UNAUTHORIZED:
         return 'Wrong credentials';
       default:
-        return 'An error has occurred!';
+        return 'An error has occurred! Try again later...';
     }
   };
 
