@@ -12,4 +12,4 @@ RUN yarn install
 
 COPY . ./
 
-CMD ["npm", "run start:prod"]
+CMD ["yarn", "run", "start:prod"]
