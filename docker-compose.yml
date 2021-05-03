@@ -1,0 +1,27 @@
+version: "3.9"
+
+#
+# prod env docker-compose file
+#
+
+services:
+
+    node:
+        image: masfernandez/node
+        container_name: react-front-webapp
+        build:
+            context: ./
+        environment:
+            # For Nginx-proxy
+            VIRTUAL_HOST: musiclabel.masfernandez.com
+        expose:
+            - 5000
+        networks:
+            - proxy
+            - musiclabel
+
+networks:
+    proxy:
+        external: true
+    musiclabel:
+        external: true
