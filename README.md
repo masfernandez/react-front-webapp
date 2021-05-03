@@ -112,8 +112,8 @@ Project Link: [https://github.com/masfernandez/react-front-webapp](https://githu
     <img src="https://views.whatilearened.today/views/github/masfernandez/views.svg"/>
 </p>
 
-[version-shield]: https://img.shields.io/github/v/release/masfernandez/react-front-webapp?style=for-the-badge
-[version]: https://github.com/masfernandez/react-front-webapp/releases
+[version-shield]: https://img.shields.io/github/v/tag/masfernandez/react-front-webapp?style=for-the-badge
+[version]: https://github.com/masfernandez/react-front-webapp/tags
 
 [contributors-shield]: https://img.shields.io/github/contributors/masfernandez/react-front-webapp.svg?style=for-the-badge
 [contributors-url]: https://github.com/masfernandez/react-front-webapp/graphs/contributors
