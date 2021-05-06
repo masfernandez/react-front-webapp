@@ -11,7 +11,7 @@ export function* authenticate() {
   const password = yield select(selectPassword);
 
   yield put(actions.changeLoading(true));
-  const requestURL = process.env.REACT_APP_API_URL + '/jwt';
+  const requestURL = process.env.REACT_APP_API_URL + '/authentication/jwt';
   const options = {
     method: 'POST',
     credentials: 'include',
